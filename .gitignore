@@ -100,5 +100,6 @@ ENV/
 # mypy
 .mypy_cache/
 
-# raw data
+# Graph data
 /raw
+/filtered

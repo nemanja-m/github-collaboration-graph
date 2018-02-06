@@ -1,0 +1,6 @@
+*
+*/
+!/processed
+!/external
+!*.keep
+!.gitignore
