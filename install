@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -e
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+RESET='\033[0m'
+
+print() { echo -e "${RED}==>${RESET} ${GREEN}$1${RESET}"; }
+
+install_dependencies() {
+  echo
+  print "Installing dependencies\n"
+
+  pip install --user -r requirements.txt
+}
+
+download_data() {
+  echo
+  print "Downloading data\n"
+
+  gsutil -m cp -n -R gs://github-collaboration-1/raw/* data/external/
+}
+
+unzip_data() {
+  echo; echo
+  print "Unzipping data\n"
+
+  gunzip data/external/*.gz -f -v
+}
+
+process_data() {
+  echo
+  print "Processing data"
+
+  python src/data/create_graph_data.py --input=data/external/ --output=data/processed/
+}
+
+install_dependencies
+download_data
+unzip_data
+process_data
+
+echo
+print "Installation successful"

@@ -1,2 +1,2 @@
 pandas==0.22.0
-gsutil==4.2.8
+gsutil==4.28
